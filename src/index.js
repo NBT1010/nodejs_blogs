@@ -5,7 +5,15 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-const route = require('./routes')
+const route = require('./routes');
+const db = require('./config/db');
+
+//connect db
+db.connect();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 //Routes init
 route(app);
 
@@ -18,5 +26,5 @@ app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-})
+  console.log(` app listening on port ${port}`);
+});
